@@ -36,7 +36,7 @@ body {
     font-family: 'Muli', sans-serif;
     font-size: 15px;
     line-height: 27px;
-    font-color: black;
+    color: black;
     margin-bottom: 170px;
 }
 ::-moz-selection {
@@ -397,9 +397,6 @@ li.menubar-cart a {
         BLOG
 ************************** */
 
-.blog-section {
-
-}
 .main-post{
     margin-bottom: 45px;
 }
@@ -459,9 +456,6 @@ li.menubar-cart a {
         SUBSCRIBE
 ************************** */
 
-.subscribe-section {
-
-}
 .subscribe-section h3 {
     font-size: 35px;
     text-align: center;
@@ -656,4 +650,34 @@ a:hover img {
 }
 #productAttribute {
     width: 312px;
+}
+
+.add-cart{
+    width: 226px;
+}
+
+@media screen {
+    
+}
+
+@media (max-width: 767px) {
+    .add-cart {
+        width: 100%;
+    }
+}
+
+.product-price-text{
+    font-size: 36px;
+}
+
+.product-price-symbol ,.product-cost{
+    font-size: 20px;
+}
+
+.product-price-text ,.product-price-symbol{
+    color: red;
+}
+
+.product-price{
+    margin: 20px 0;
 }
