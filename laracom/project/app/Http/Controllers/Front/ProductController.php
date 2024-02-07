@@ -6,6 +6,11 @@ use App\Shop\Products\Product;
 use App\Shop\Products\Repositories\Interfaces\ProductRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Shop\Products\Transformations\ProductTransformable;
+use App\Shop\Products\Requests\EvaluatedRequest;
+use Illuminate\Log\Logger;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
 
 class ProductController extends Controller
 {
@@ -54,12 +59,32 @@ class ProductController extends Controller
         $images = $product->images()->get();
         $category = $product->categories()->first();
         $productAttributes = $product->attributes;
+        $evaluation = $product -> evaluations() -> latest() -> limit(10) -> get();
+        $evaluation = $evaluation -> map(function($item){
+            $item['evaluatStar'] = $this -> evaluatToStar($item['evaluat']);
+            return $item;
+        });
 
         return view('front.products.product', compact(
             'product',
             'images',
             'productAttributes',
-            'category'
+            'category',
+            'evaluation'
         ));
+    }
+
+    public function evaluatToStar($ev)
+    {
+        $stars = "";
+        for($i = 0; $i < $ev; $i++)
+        {
+            $stars .= "★";
+        }
+        for($i = 0; $i < 5 -$ev; $i++)
+        {
+            $stars .= "☆";
+        }
+        return $stars;
     }
 }

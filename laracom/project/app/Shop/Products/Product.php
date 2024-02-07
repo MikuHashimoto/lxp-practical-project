@@ -144,4 +144,9 @@ class Product extends Model implements Buyable
     {
         return $this->belongsTo(Brand::class);
     }
+
+    public function evaluations()
+    {
+        return $this -> hasMany(Evaluations::class);
+    }
 }
