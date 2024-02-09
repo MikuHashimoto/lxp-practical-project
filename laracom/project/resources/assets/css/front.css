@@ -681,3 +681,71 @@ a:hover img {
 .product-price{
     margin: 20px 0;
 }
+
+/* レビューコメント */
+#evaluations div {
+    display: inline;
+}
+
+#evaluations div h1 {
+    color: #eeb360;
+}
+
+#evaluations .evaluation-text {
+    border: solid 1px black;
+}
+
+.evaluat{
+    margin-top: 20px;
+}
+
+.evaluat_num{
+    width: 20%;
+}
+.evaluat-comment {
+    width: 60%;
+}
+
+#evaluat_value{
+    padding-left: 20px;
+}
+
+#evaluat_submit {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+#evaluat_submit div {
+    display: flex;
+    flex-direction: column;
+}
+
+#evaluat_submit .evaluat-comment {
+    text-align: left;
+}
+
+#evaluat_value, #evaluat_comment {
+    border-color: black;
+    width: 100%;
+    height: 50px;
+    color: black;
+    font-size: 16px;
+}
+
+#evaluat_comment{
+    padding: 10px;
+    text-align: left;
+}
+
+#evaluat_submit p {
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+#evaluat_submit button {
+    width: 15%;
+    height: 50px;
+    vertical-align: bottom;
+}
+

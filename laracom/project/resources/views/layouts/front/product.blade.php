@@ -83,21 +83,76 @@
                             かごに追加
                         </button>
                     </form>
+                    <div class="evaluat">
+                        <div id="evaluations">
+                            @if (isset($evaluation))
+                                @foreach ($evaluation as $evaluat)
+                                    <div>
+                                        <h1>{!! $evaluat->evaluatStar !!}</h1>
+                                        <p class="evaluation-text">{{ $evaluat->comment }}</p>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                        @if (auth()->check())
+                            @if (session('success'))
+                                <p>評価とコメントを登録しました</p>
+                            @else
+                                <form action="{{ route('evaluation.store') }}" class="form-inline" id="evaluat_submit"
+                                    method="post">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="product" value="{{ $product->id }}" />
+                                    <div class="evaluat-num">
+                                        <p>評価</p>
+                                        <input type="number" name="evaluat" id="evaluat_value" min="1"
+                                            max="5" value="5">
+                                    </div>
+                                    <div class="evaluat-comment">
+                                        <p>コメント</p>
+                                        <input type="text" name="comment" id="evaluat_comment"
+                                            placeholder="コメントを入力してください">
+                                    </div>
+                                    <button type="submit" class="btn btn-warning" id="evaluat_button"
+                                        disabled>登録</button>
+                                </form>
+                            @endif
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @section('js')
     <script type="text/javascript">
         $(document).ready(function() {
             var productPane = document.querySelector('.product-cover');
             var paneContainer = document.querySelector('.product-cover-wrap');
 
+            const MAX_EVALUATION_VALUE = 5;
+            const MAX_EVALUATION_COMMENT = 100;
             new Drift(productPane, {
                 paneContainer: paneContainer,
                 inlinePane: false
             });
+            $("#evaluat_value").on("input", evaluatChangeEvent);
+            $("#evaluat_comment").on("input", evaluatChangeEvent);
+
+            function evaluatChangeEvent(e) {
+                $("#evaluat_button").prop("disabled", !(checkEvaluatValue() && checkEvaluatComment()));
+            }
+
+            function checkEvaluatValue() {
+                const evaluatValue = $("#evaluat_value").val();
+                return evaluatValue && evaluatValue > 0 && evaluatValue <= MAX_EVALUATION_VALUE;
+            }
+
+            function checkEvaluatComment() {
+                return $("#evaluat_comment").val().length > 0 &&
+                    $("#evaluat_comment").val().length <= MAX_EVALUATION_COMMENT;
+            }
+
         });
     </script>
 @endsection

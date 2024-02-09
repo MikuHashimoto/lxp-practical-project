@@ -87,7 +87,8 @@ Route::namespace('Front')->group(function () {
             Route::resource('country.state', 'CountryStateController');
             Route::resource('state.city', 'StateCityController');
         });
-
+        
+        Route::post("evaluation", 'EvaluationController@store')->name('evaluation.store');
         Route::get('accounts', 'AccountsController@index')->name('accounts');
         Route::get('checkout', 'CheckoutController@index')->name('checkout.index');
         Route::post('checkout', 'CheckoutController@store')->name('checkout.store');
@@ -97,6 +98,7 @@ Route::namespace('Front')->group(function () {
         Route::get('checkout/success', 'CheckoutController@success')->name('checkout.success');
         Route::resource('customer.address', 'CustomerAddressController');
     });
+    
     Route::resource('cart', 'CartController');
     Route::get("category/{slug}", 'CategoryController@getCategory')->name('front.category.slug');
     Route::get("search", 'ProductController@search')->name('search.product');
