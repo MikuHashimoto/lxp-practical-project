@@ -40,6 +40,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
                 Route::get('remove-image-category', 'CategoryController@removeImage')->name('category.remove.image');
             });
             Route::namespace('Orders')->group(function () {
+                Route::resource('reviews', 'ReviewController');
                 Route::resource('orders', 'OrderController');
                 Route::resource('order-statuses', 'OrderStatusController');
                 Route::get('orders/{id}/invoice', 'OrderController@generateInvoice')->name('orders.invoice.generate');
@@ -87,7 +88,7 @@ Route::namespace('Front')->group(function () {
             Route::resource('country.state', 'CountryStateController');
             Route::resource('state.city', 'StateCityController');
         });
-        
+
         Route::post("evaluation", 'EvaluationController@store')->name('evaluation.store');
         Route::get('accounts', 'AccountsController@index')->name('accounts');
         Route::get('checkout', 'CheckoutController@index')->name('checkout.index');
@@ -98,7 +99,7 @@ Route::namespace('Front')->group(function () {
         Route::get('checkout/success', 'CheckoutController@success')->name('checkout.success');
         Route::resource('customer.address', 'CustomerAddressController');
     });
-    
+
     Route::resource('cart', 'CartController');
     Route::get("category/{slug}", 'CategoryController@getCategory')->name('front.category.slug');
     Route::get("search", 'ProductController@search')->name('search.product');
